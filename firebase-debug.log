@@ -1,0 +1,18 @@
+[debug] [2017-12-17T08:23:09.862Z] ----------------------------------------------------------------------
+[debug] [2017-12-17T08:23:09.865Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2017-12-17T08:23:09.866Z] CLI Version:   3.16.0
+[debug] [2017-12-17T08:23:09.866Z] Platform:      darwin
+[debug] [2017-12-17T08:23:09.866Z] Node Version:  v6.11.5
+[debug] [2017-12-17T08:23:09.867Z] Time:          Sun Dec 17 2017 15:23:09 GMT+0700 (+07)
+[debug] [2017-12-17T08:23:09.867Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-12-17T08:23:09.881Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-12-17T08:23:09.881Z] > authorizing via signed-in user
+[debug] [2017-12-17T08:23:09.884Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/hw-lab  
+  
+ Sun Dec 17 2017 15:23:09 GMT+0700 (+07)
+[debug] [2017-12-17T08:23:10.936Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-17T08:23:10.937Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/hw-lab/tokens  
+  
+ Sun Dec 17 2017 15:23:10 GMT+0700 (+07)
+[debug] [2017-12-17T08:23:11.808Z] <<< HTTP RESPONSE 200
