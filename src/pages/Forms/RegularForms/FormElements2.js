@@ -7,14 +7,14 @@ class FormElements extends Component {
   componentDidMount() {
     const rootRef = firebase.database().ref().child('systemInfo');
     rootRef.on('value', snap => {
-         this.setState({ text : snap.val()});
-//       if( snap.val() == "thef"){
-//         this.setState({ text: "fuckThef" });
-//       } else if( snap.val() == "ok"){
-//         this.setState({ text: "ok goo" });
-//       } else {
-//         this.setState({ text: "error" });
-//       }
+      this.setState({ text : snap.val()});
+      // if( snap.val() == "thef"){
+      //   this.setState({ text: "fuckThef" });
+      // } else if( snap.val() == "ok"){
+      //   this.setState({ text: "ok goo" });
+      // } else {
+      //   this.setState({ text: "error" });
+      // }
     });    
 
   }
