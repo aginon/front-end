@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+// import { Field, reduxForm } from 'redux-form';
+// import renderField from 'components/FormInputs/renderField';
 // import generateData from '../generateData';
 import Switch from 'components/Switch';
 import * as firebase from 'firebase';
@@ -23,7 +25,9 @@ import * as firebase from 'firebase';
 
 class TableWithSwitch extends Component {
   state = {
-    items: [{ id: 1, name: "Loading", status: "Loading", active: false }, { id: 2, name: "Loading", status: "Loading", active: false }, { id: 3, name: "Loading", status: "Loading", active: false }, { id: 4, name: "Loading", status:"Loading",active:false}]
+    items: [{ id: 1, name: "Loading", status: "Loading", active: false }, { id: 2, name: "Loading", status: "Loading", active: false }],
+    selectedRadio: 'null'
+
   };
   
   componentDidMount(){
@@ -130,36 +134,21 @@ class TableWithSwitch extends Component {
     //s4
     S4Ref.child('isActive').on('value', snap => {
       this.setState({
-        items: this.state.items.map(item => {
-          if (item.id === 4) {
-            item.active = snap.val();
-          }
-          return item;
-        })
-      });
-    });
-    S4Ref.child('name').on('value', snap => {
-      this.setState({
-        items: this.state.items.map(item => {
-          if (item.id === 4) {
-            item.name = snap.val();
-          }
-          return item;
-        })
-      });
-    });
-    S4Ref.child('detectStatus').on('value', snap => {
-      this.setState({
-        items: this.state.items.map(item => {
-          if (item.id === 4) {
-            item.status = snap.val();
-          }
-          return item;
-        })
-      });
+        selectedRadio: snap.val()
+      })
     });
 
     }
+
+  handleRadioChange = (event) => {
+    const rootRef = firebase.database().ref().child('SensorInfo');
+    const S1Ref = rootRef.child('Sound');
+    S1Ref.update({ isActive: event.currentTarget.value });
+
+    this.setState({
+      selectedRadio: event.currentTarget.value
+    })
+  };
 
   toggleActive = itemId => {
     this.setState({
@@ -201,6 +190,7 @@ class TableWithSwitch extends Component {
           <p className="category">Control IoT by your finger.</p>
         </div>
         <div className="content table-responsive table-full-width">
+
           <table className="table table-hover table-striped">
             <thead>
               <tr>
@@ -219,15 +209,60 @@ class TableWithSwitch extends Component {
                   <td>{item.status}</td>
                   {/* <td className="text-right">$ {item.salary}</td> */}
                   <td>
-                    <Switch value={item.active} onChange={() => this.toggleActive(item.id)} />
+                    {item.active}
+                    {/* <Switch value={item.active} onChange={() => this.toggleActive(item.id)} /> */}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+          {/* <button className="btn btn-wd">Default</button>
+          <button className="btn btn-wd">Default</button>
+          <button className="btn btn-fill btn-wd">Fill</button>               */}
+          {/* <ul className="pagination pagination-no-border"> */}
+            {/* <li><a href="#">ON</a></li>
+            <li><a href="#">OFF</a></li>
+            <li className="active"><a href="#">AUTO</a></li> */}
+          <div className="form-group">
+            <legend>Sound</legend>
 
+
+            <div className="col checkbox-group">
+            
+            <div className="input-row">
+              {/* <h5>Sound&nbsp;&nbsp;&nbsp;&nbsp;</h5> */}
+
+              <input
+                type="radio"
+                name="auto"
+                value="auto"
+                checked={this.state.selectedRadio === 'auto'}
+                onChange={this.handleRadioChange}
+              />
+                <label >AUTO&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <input
+                type="radio"
+                name="ON"
+                value="on"
+                checked={this.state.selectedRadio === 'on'}
+                onChange={this.handleRadioChange}
+              />
+                <label >ON&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <input
+                type="radio"
+                name="off"
+                value="off"
+                checked={this.state.selectedRadio === 'off'}
+                onChange={this.handleRadioChange}
+              />
+                <label >OFF&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            </div>
+          </div>
+          </div>
+          {/* </ul> */}
         </div>
       </div>
+      
     )
   }
 }
